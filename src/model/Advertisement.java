@@ -37,7 +37,7 @@ public class Advertisement {
 		return this.price;
 	}
 	
-	
+	//date getter
 	public LocalDateTime getDate() {
 		return date;
 	}
