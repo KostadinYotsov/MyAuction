@@ -1,0 +1,60 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="register.css">
+<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+</head>
+<body ng-controller="RegisterCtrl" ng-app="myApp">
+  <div class = "container">
+    <div id="signup">
+      <div class="signup-screen">
+        <div class="space-bot text-center">
+          <h1>Register</h1>
+          <div class="divider"></div>
+        </div>
+        
+        <form class="form-register" action="register" method="post" name="register" novalidate>
+        
+        <div class="input-field col s6">
+            <input id="username" type="text" name="username" class="validate" required>
+            <label for="username">Username</label>
+          </div>
+          
+           <div class="input-field col s6">
+            <input id="password" type="password" name="password" class="validate" required>
+            <label for="password">Password</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="password" type="password" name="password2" class="validate" required>
+            <label for="password">Confirm Password</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="email" type="email" name="email" class="validate" required>
+            <label for="email">Email</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="firstname" type="text" name="firstname" class="validate" required>
+            <label for="firstname">First Name</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="lastname" type="text" name="lastname" class="validate" required>
+            <label for="lastname">Last Name</label>
+          </div>
+                    
+          <div class="control-group">
+     		 <!-- Button -->
+     		 <div class="controls">
+      		  <button class="btn btn-success">Register</button>
+    		 </div>
+  		  </div>
+  		   
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
