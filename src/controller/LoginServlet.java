@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.DBManager;
 import model.dao.UserDAO;
@@ -29,7 +30,9 @@ public class LoginServlet extends HttpServlet {
 		if (validData) {
 			try {
 				if(UserDAO.getInstance().validLogin(username, password)){
-					fileName = "index.html";
+					HttpSession session=req.getSession();
+					session.setAttribute("USER", username);
+					fileName = "iSndex.html";
 				}
 				else{
 					fileName = "loginFailed.html";

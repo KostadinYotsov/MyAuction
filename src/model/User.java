@@ -27,13 +27,6 @@ public class User {
 	}
 	
 	
-	public void createAdvertisement(String title, String description, Category category, double price){
-		Advertisement ad=new Advertisement(this,title, description, category, price);
-		this.ads.add(ad);
-		
-	}
-	
-	
 	public void deleteAdvertisement(Advertisement ad){
 		if (ad!=null) {
 			this.ads.remove(ad);
@@ -88,6 +81,18 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		return " [id=" + id + "]";
+	}
+	
+
+	
 	
 }
 

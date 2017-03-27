@@ -1,5 +1,6 @@
 package model.dao;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,19 +51,35 @@ public class UserDAO {
 			while(res.next()){
 				User u =new User(
 				res.getString("username"), res.getString("password"), res.getString("firstname"), res.getString("lastname"), res.getString("email"));
-				u.setId(res.getLong("id"));
+//				long id=res.getLong("id");
+//				u.setId(id);
 				allUsers.put(u.getUsername(), u);
+				
+				
 			}
 		}
 		return allUsers;
 	}
 
+	
 	public synchronized boolean validLogin(String username, String password) throws SQLException {
 		HashMap<String, User> allusers=UserDAO.getInstance().getAllUsers();
+//		for (java.util.Map.Entry<String, User> e: allusers.entrySet()) {
+//			System.out.println( e.getKey() + ": " + e.getValue());
+//		}
 		if (allusers.containsKey(username)) {
 			User u=allusers.get(username);
 			return u.getPassword().equals(password);
 		}
 		return false;
+	}
+	
+	public long getUserId (String username) {
+		if (allUsers.containsKey(username)) {
+			User u=allUsers.get(username);
+			long id=u.getId();
+			return id;
+		}
+		return 0;
 	}
 }

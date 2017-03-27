@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 public class Advertisement {
 	private String title;
 	private String description;
-	private User owner;
-	private Category category;
+	private long owner;
+	private String category;
 	private LocalDateTime date;
 	private double price;
 	
-	public Advertisement(User owner, String title, String description, Category category, double price){
+	public Advertisement(long userId, String title, String description, String category, double price){
 		this.title = title;
 		this.description = description;
 		this.category = category;
@@ -29,7 +29,7 @@ public class Advertisement {
 		return description;
 	}
 	
-	public Category getCategory(){
+	public String getCategory(){
 		return this.category;
 	}
 
@@ -37,9 +37,6 @@ public class Advertisement {
 		return this.price;
 	}
 	
-	public User getOwner() {
-		return owner;
-	}
 	
 	public LocalDateTime getDate() {
 		return date;
