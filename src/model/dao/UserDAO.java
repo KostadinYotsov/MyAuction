@@ -45,14 +45,14 @@ public class UserDAO {
 	
 	public HashMap<String, User> getAllUsers() throws SQLException{
 		if(allUsers.isEmpty()){
-			String sql = "SELECT username, password, firstname, lastname, email FROM users;";
+			String sql = "SELECT id, username, password, firstname, lastname, email FROM users;";
 			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while(res.next()){
 				User u =new User(
 				res.getString("username"), res.getString("password"), res.getString("firstname"), res.getString("lastname"), res.getString("email"));
-//				long id=res.getLong("id");
-//				u.setId(id);
+				long id=res.getLong("id");
+				u.setId(id);
 				allUsers.put(u.getUsername(), u);
 				
 				
