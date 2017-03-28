@@ -15,6 +15,11 @@ public class CategoryDAO {
 	private static final HashMap<String, Integer> categories = new HashMap<>();
 	
 	private CategoryDAO(){
+		try {
+			getCategories();
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
 	}
 	
 	public static synchronized CategoryDAO getInstance(){
@@ -24,7 +29,7 @@ public class CategoryDAO {
 		return instance;
 	}
 	
-	public void getCategories() throws SQLException{
+	private void getCategories() throws SQLException{
 		String sql ="SELECT id, type FROM categories";
 		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
 		ResultSet res = st.executeQuery();

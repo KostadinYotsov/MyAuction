@@ -1,69 +1,61 @@
-<!DOCTYPE html>
+
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<link rel="stylesheet" href="register.css">
+<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 </head>
-<body>
-<form class="form-horizontal" action='register' method="POST">
-  <fieldset>
-    <h3 class="panel-title"> Register failed! Please try again!</h3>
-    <div class="control-group">
-      <!-- Username -->
-      <label class="control-label"  for="username">Username</label>
-      <div class="controls">
-        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+<body ng-controller="RegisterCtrl" ng-app="myApp">
+  <div class = "container">
+    <div id="signup">
+      <div class="signup-screen">
+        <div class="space-bot text-center">
+          <h1>Register</h1>
+          <h2>Register failed! <br> Please, check your data and try again</h2>
+          <div class="divider"></div>
+        </div>
+        
+        <form class="form-register" action="register" method="post" name="register" novalidate>
+        
+        <div class="input-field col s6">
+            <input id="username" type="text" name="username" class="validate" required>
+            <label for="username">Username</label>
+          </div>
+          
+           <div class="input-field col s6">
+            <input id="password" type="password" name="password" class="validate" required>
+            <label for="password">Password</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="password" type="password" name="password2" class="validate" required>
+            <label for="password">Confirm Password</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="email" type="email" name="email" class="validate" required>
+            <label for="email">Email</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="firstname" type="text" name="firstname" class="validate" required>
+            <label for="firstname">First Name</label>
+          </div>
+          
+          <div class="input-field col s6">
+            <input id="lastname" type="text" name="lastname" class="validate" required>
+            <label for="lastname">Last Name</label>
+          </div>
+                    
+          <div class="control-group">
+     		 <!-- Button -->
+     		 <div class="controls">
+      		  <button class="btn btn-success">Register</button>
+    		 </div>
+  		  </div>
+  		   
+        </form>
       </div>
     </div>
- 
-    <div class="control-group">
-      <!-- Password-->
-      <label class="control-label" for="password">Password</label>
-      <div class="controls">
-        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <!-- Confirm Password-->
-      <label class="control-label" for="password2">Confirm password</label>
-      <div class="controls">
-        <input type="password" id="password2" name="password2" placeholder="" class="input-xlarge">
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <!-- First name -->
-      <label class="control-label" for="firstname">First name</label>
-      <div class="controls">
-        <input type="text" id="firstname" name="firstname" placeholder="" class="input-xlarge">
-      </div>
-    </div>
-    
-     <div class="control-group">
-      <!-- First name -->
-      <label class="control-label" for="lastname">Last name</label>
-      <div class="controls">
-        <input type="text" id="lastname" name="lastname" placeholder="" class="input-xlarge">
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <!-- E-mail -->
-      <label class="control-label" for="email">E-mail</label>
-      <div class="controls">
-        <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-      </div>
-    </div>
-    
- 
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-        <button class="btn btn-success">Register</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
+  </div>
 </body>
 </html>

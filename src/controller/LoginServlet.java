@@ -31,8 +31,9 @@ public class LoginServlet extends HttpServlet {
 			try {
 				if(UserDAO.getInstance().validLogin(username, password)){
 					HttpSession session=req.getSession();
-					session.setAttribute("USER", username);
-					fileName = "iSndex.html";
+					session.setAttribute("username", username);
+					session.setAttribute("logged", true);
+					fileName = "index.html";
 				}
 				else{
 					fileName = "loginFailed.html";

@@ -1,20 +1,19 @@
 package model.dao;
 
-import java.security.Timestamp;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import model.Advertisement;
-import model.User;
+
 
 public class AdvertisementDAO {
 
 	private static AdvertisementDAO instance;
-	private static final HashMap<User, ArrayList<Advertisement>> usersAvertisement = new HashMap<>();//user - > all advertisement
+	private static final ArrayList<Advertisement> allAvertisement = new ArrayList<>();//user - > all advertisement
 	
 	private AdvertisementDAO(){
 	}
