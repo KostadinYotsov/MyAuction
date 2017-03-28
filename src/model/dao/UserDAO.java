@@ -15,6 +15,12 @@ public class UserDAO {
 	private static final HashMap<String, User> allUsers = new HashMap<>();//username - > user
 	
 	private UserDAO(){
+		try {
+			getAllUsers();
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
+		
 	}
 	
 	public static synchronized UserDAO getInstance(){
@@ -43,7 +49,7 @@ public class UserDAO {
 		allUsers.put(u.getUsername(), u);
 	}
 	
-	public HashMap<String, User> getAllUsers() throws SQLException{
+	private HashMap<String, User> getAllUsers() throws SQLException{
 		if(allUsers.isEmpty()){
 			String sql = "SELECT id, username, password, firstname, lastname, email FROM users;";
 			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
@@ -63,12 +69,12 @@ public class UserDAO {
 
 	
 	public synchronized boolean validLogin(String username, String password) throws SQLException {
-		HashMap<String, User> allusers=UserDAO.getInstance().getAllUsers();
+//		HashMap<String, User> allusers=UserDAO.getInstance().getAllUsers();
 //		for (java.util.Map.Entry<String, User> e: allusers.entrySet()) {
 //			System.out.println( e.getKey() + ": " + e.getValue());
 //		}
-		if (allusers.containsKey(username)) {
-			User u=allusers.get(username);
+		if (allUsers.containsKey(username)) {
+			User u=allUsers.get(username);
 			return u.getPassword().equals(password);
 		}
 		return false;
