@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session=req.getSession();
 					session.setAttribute("username", username);
 					session.setAttribute("logged", true);
-					fileName = "index.html";
+					fileName = "main.html";
 				}
 				else{
 					fileName = "loginFailed.html";

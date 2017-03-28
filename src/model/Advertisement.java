@@ -5,19 +5,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Advertisement {
+	private long id;
 	private String title;
 	private String description;
-	private long owner;
-	private String category;
+	private long userId;
+	private int categoryID;
 	private LocalDateTime date;
 	private double price;
+	private String category;
 	
-	public Advertisement(long userId, String title, String description, String category, double price){
+	public Advertisement(String title, String description, String category, double price){
 		this.title = title;
 		this.description = description;
-		this.category = category;
+		this.category=category;
 		this.price = price;
-		this.owner=owner;
 		this.date=date.now();
 		
 	}
@@ -30,8 +31,8 @@ public class Advertisement {
 		return description;
 	}
 	
-	public String getCategory(){
-		return this.category;
+	public int getCategoryID(){
+		return this.categoryID;
 	}
 
 	public double getPrice() {
@@ -43,8 +44,20 @@ public class Advertisement {
 		return date;
 	}
 	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
+	public void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
+	}
+	
 	@Override
 	public String toString() {
-		return this.owner + " : "+ this.category + ":" + this.title;
+		return null;
 	}
 }
