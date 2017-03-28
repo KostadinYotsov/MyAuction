@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBManager {
-
-	
+public class DBManager {	
 	private static DBManager instance;
 	private static final String DB_IP = "localhost";
 	private static final String DB_PORT = "3306";

@@ -19,7 +19,7 @@ import model.dao.UserDAO;
 public class MakeAdvertisementServlet extends HttpServlet {
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Boolean logged = (Boolean) req.getSession().getAttribute("logged");
 		if (logged==null || logged==false) {
@@ -33,6 +33,7 @@ public class MakeAdvertisementServlet extends HttpServlet {
 		long userId=UserDAO.getInstance().getUserId(username);
 		int categoryId=CategoryDAO.getInstance().getCategoryId(category);
 		double price=Double.parseDouble(priceText);
+		System.out.println(title+" "+description+" "+price+" "+category+categoryId+userId);
 		
 		boolean validData = false;
 		
@@ -50,9 +51,10 @@ public class MakeAdvertisementServlet extends HttpServlet {
 			a.setUserId(userId);
 			try {
 				AdvertisementDAO.getInstance().addAdvertisement(a);
-				resp.sendRedirect(filename);
+				//resp.sendRedirect(filename);NE
 			} catch (SQLException e) {
-				System.out.println("");
+				filename="makeAdvertismentFailed.html";
+				System.out.println("aaaaa "+e.getMessage());
 			}
 		}
 		resp.sendRedirect(filename);

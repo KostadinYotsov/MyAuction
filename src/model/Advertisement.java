@@ -48,6 +48,10 @@ public class Advertisement {
 		this.id = id;
 	}
 	
+	public long getUserId() {
+		return userId;
+	}
+	
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
@@ -55,9 +59,11 @@ public class Advertisement {
 	public void setCategoryID(int categoryID) {
 		this.categoryID = categoryID;
 	}
-	
+
 	@Override
 	public String toString() {
-		return null;
+		return "Title: " + title + ", Description: " + description + ", Price: " + price + ", Category: "+ category;
 	}
+	
+	
 }

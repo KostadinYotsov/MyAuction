@@ -1,6 +1,5 @@
 package model.dao;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,7 @@ import model.Advertisement;
 
 
 public class AdvertisementDAO {
+	
 
 	private static AdvertisementDAO instance;
 	private static final ArrayList<Advertisement> allAvertisement = new ArrayList<>();
@@ -26,13 +26,18 @@ public class AdvertisementDAO {
 	}
 
 	public synchronized void addAdvertisement (Advertisement a) throws SQLException{
-		String sql = "INSERT INTO advertisements (title, description, date, price, category_id, user_id) values (?, ?, ?, ?, ?,?)";
+		int categorieID=a.getCategoryID();
+		long userID=a.getUserId();
+		String sql = "INSERT INTO advertisements (title, description, date, price, user_id, categorie_id) values (?, ?, ?, ?, ?,?)";
 		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
 		st.setString(1, a.getTitle());
 		st.setString(2, a.getDescription());
 		st.setTimestamp(3, java.sql.Timestamp.valueOf(a.getDate()));
 		st.setDouble(4, a.getPrice());
+		st.setLong(5, userID);
+		st.setInt(6, categorieID);		
 		st.executeUpdate();
+		
 		ResultSet res = st.getGeneratedKeys();
 		res.next();
 		long id = res.getLong(1);
@@ -48,11 +53,14 @@ public class AdvertisementDAO {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
-				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("category"), res.getDouble("price"));
+				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("type"), res.getDouble("price"));
 				ads.add(a);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL : " + e.getMessage());
+		}
+		for(Advertisement a : ads){
+			System.out.println(a);
 		}
 		return ads;
 	}

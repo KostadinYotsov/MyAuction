@@ -1,4 +1,9 @@
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.io.Writer"%>
+<%@page import="model.Advertisement"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.dao.UserDAO" %>
+<%@page import="model.dao.AdvertisementDAO" %>
 <%@page import="model.User" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -17,7 +22,7 @@
 	 		return;
  		}
  	%> 	
- 	<div class="col-profile">
+ 	
   <div class="profile-info">
     <div class="BlockTitle">
       <div class="id">
@@ -27,12 +32,20 @@
     <% 
 	 	String username = (String)session.getAttribute("username"); 	
     	User user=UserDAO.getInstance().getUser(username);
+    	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisementsByUser((int)user.getId());
+    	
  	%>
     <div class="BlockCont">
-      <div class="udtlb">Username:</div><%user.getUsername();%><div class="udtrb"><b></b></div>
-       <div class="udtlb">First name:</div><%user.getFirstname(); %><div class="udtrb"><b></b></div>
-        <div class="udtlb">Last name:</div><%user.getLastname(); %><div class="udtrb"><b></b></div>
-         <div class="udtlb">Email:</div><%user.getEmail();%><div class="udtrb"><b></b></div>
+      <div class="udtlb">Username: <%out.print(user.getUsername());%></div>
+       <div class="udtlb">First name: <%out.print(user.getFirstname()); %></div>
+        <div class="udtlb">Last name: <%out.print(user.getLastname()); %></div>
+         <div class="udtlb">Email: <%out.print(user.getEmail());%></div>
+         <div class="udtlb">All advertisements: </div><%          
+         	for(Advertisement a : ads){
+         	out.println(a); %>
+         	<br>
+         	<%} %>
+         
 	</div>
 
   <div class="profile-info-avatar">
