@@ -45,7 +45,9 @@ public class MakeAdvertisementServlet extends HttpServlet {
 		
 		if (validData) {
 			filename="profile.jsp";
-			Advertisement a=new Advertisement(userId, title, description, category, price);
+			Advertisement a=new Advertisement(title, description, category, price);
+			a.setCategoryID(categoryId);
+			a.setUserId(userId);
 			try {
 				AdvertisementDAO.getInstance().addAdvertisement(a);
 				resp.sendRedirect(filename);
