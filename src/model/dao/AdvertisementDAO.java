@@ -13,7 +13,7 @@ import model.Advertisement;
 public class AdvertisementDAO {
 
 	private static AdvertisementDAO instance;
-	private static final ArrayList<Advertisement> allAvertisement = new ArrayList<>();//user - > all advertisement
+	private static final ArrayList<Advertisement> allAvertisement = new ArrayList<>();
 	
 	private AdvertisementDAO(){
 	}
@@ -40,6 +40,8 @@ public class AdvertisementDAO {
 		//u.setId(id);
 		//allUsers.put(u.getUsername(), u);
 	}
+	
+	
 	
 	
 }

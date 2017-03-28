@@ -87,4 +87,12 @@ public class UserDAO {
 		}
 		return 0;
 	}
+	
+	public User getUser (String username) {
+		if (allUsers.containsKey(username)) {
+			User u=allUsers.get(username);
+			return u;			
+		}
+		return null;
+	}
 }
