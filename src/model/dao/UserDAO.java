@@ -53,9 +53,7 @@ public class UserDAO {
 				res.getString("username"), res.getString("password"), res.getString("firstname"), res.getString("lastname"), res.getString("email"));
 //				long id=res.getLong("id");
 //				u.setId(id);
-				allUsers.put(u.getUsername(), u);
-				
-				
+				allUsers.put(u.getUsername(), u);				
 			}
 		}
 		return allUsers;
