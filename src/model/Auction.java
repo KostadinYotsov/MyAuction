@@ -3,6 +3,7 @@ package model;
 import java.util.Stack;
 
 public class Auction {
+
 	private static final double SELL_PRICE_MULTIPLIER = 0.9;
 	private static final double CUR_PRICE_MULTIPLIER = 0.5;
 	
@@ -46,5 +47,12 @@ public class Auction {
 
 	public void setId(int id) {
 		this.id=id;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Title:" + advertisementTitle + ", StartingPrice: " + startingPrice
+				+ ", CurrentPrice: " + currentPrice + ", SellPrice: " + sellPrice;
 	}
 }

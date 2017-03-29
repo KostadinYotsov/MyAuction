@@ -33,7 +33,6 @@ public class MakeAdvertisementServlet extends HttpServlet {
 		int userId=UserDAO.getInstance().getUserId(username);
 		int categoryId=CategoryDAO.getInstance().getCategoryId(category);
 		double price=Double.parseDouble(priceText);
-		System.out.println(title+" "+description+" "+price+" "+category+categoryId+userId);
 		
 		boolean validData = false;
 		

@@ -1,9 +1,11 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.io.Writer"%>
 <%@page import="model.Advertisement"%>
+<%@page import="model.Auction"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.dao.UserDAO" %>
 <%@page import="model.dao.AdvertisementDAO" %>
+<%@page import="model.dao.AuctionDAO" %>
 <%@page import="model.User" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -34,6 +36,7 @@
     	User user=UserDAO.getInstance().getUser(username);
     	int userId=user.getId();
     	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisementsByUser(userId);
+    	ArrayList<Auction> auctions=AuctionDAO.getInstance().getAllAuctionsByUser(userId) ;
     	
  	%>
     <div class="BlockCont">
@@ -46,7 +49,17 @@
          	out.println(a); %>
          	<img src="noimage.gif" width="100" height="100">         	
          	<br>
-         	<%} %>         
+         	<%} %>       
+         	
+         	 <div class="udtlb">All auctions: </div>
+         	<%      
+         	for(Auction a : auctions){
+         	out.println(a); %>
+         	<img src="noimage.gif" width="100" height="100">         	
+         	<br>
+         	<%} 
+         %>          	
+         	  
 	</div>
 
   <div class="profile-info-avatar">

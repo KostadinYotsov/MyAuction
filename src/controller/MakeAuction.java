@@ -17,7 +17,7 @@ import model.dao.AuctionDAO;
 import model.dao.CategoryDAO;
 import model.dao.UserDAO;
 
-@WebServlet("/makeAdvertisement")
+@WebServlet("/makeAuction")
 public class MakeAuction extends HttpServlet{
 
 	
@@ -26,7 +26,7 @@ public class MakeAuction extends HttpServlet{
 		HttpSession session = req.getSession();
 		Boolean logged = (Boolean) req.getSession().getAttribute("logged");
 		if (logged==null || logged==false) {
-			resp.sendRedirect("index.html");
+			resp.sendRedirect("login.html");
 		}
 		String username = (String) session.getAttribute("username");
 		String title = req.getParameter("title");

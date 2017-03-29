@@ -28,14 +28,14 @@ public class AdvertisementDAO {
 
 	public synchronized void addAdvertisement (Advertisement a) throws SQLException{
 		int categorieID=a.getCategoryID();
-		long userID=a.getUserId();
+		int userID=a.getUserId();
 		String sql = "INSERT INTO advertisements (title, description, date, price, user_id, categorie_id) values (?, ?, ?, ?, ?,?)";
 		PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
 		st.setString(1, a.getTitle());
 		st.setString(2, a.getDescription());
 		st.setTimestamp(3, java.sql.Timestamp.valueOf(a.getDate()));
 		st.setDouble(4, a.getPrice());
-		st.setLong(5, userID);
+		st.setInt(5, userID);
 		st.setInt(6, categorieID);		
 		st.executeUpdate();
 		
@@ -43,18 +43,21 @@ public class AdvertisementDAO {
 		res.next();
 		int id = res.getInt(1);
 		a.setId(id);
+		System.out.println(id);
 		allAdvertisement.add(a);
 	}
 
 	public synchronized ArrayList<Advertisement>  getAllAdvertisementsByUser (int userId) {
 		ArrayList<Advertisement> ads=new ArrayList<>();
-		String sql="SELECT a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id="+userId;
+		String sql="SELECT a.id, a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id="+userId;
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
+				int advId=res.getInt("id");
 				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("type"), res.getDouble("price"));
+				a.setId(advId);
 				ads.add(a);
 			}
 		} catch (SQLException e) {
@@ -65,13 +68,15 @@ public class AdvertisementDAO {
 	
 	public synchronized  ArrayList<Advertisement>  getAllAdvertisements (int userId) {
 		ArrayList<Advertisement> ads=new ArrayList<>();
-		String sql="SELECT a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!="+userId;
+		String sql="SELECT a.id,a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!="+userId;
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
+				int advId=res.getInt("id");
 				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("type"), res.getDouble("price"));
+				a.setId(advId);
 				ads.add(a);
 			}
 		} catch (SQLException e) {
@@ -86,6 +91,7 @@ public class AdvertisementDAO {
 		ArrayList<Advertisement> ads=AdvertisementDAO.getInstance().getAllAdvertisementsByUser(userId);
 		for (Advertisement a : ads) {
 			if (title.equals(a.getTitle())) {
+				System.out.println(a.getId());
 				return a;
 			}
 		}	

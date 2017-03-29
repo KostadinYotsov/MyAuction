@@ -3,9 +3,12 @@
     <%@page import="model.dao.AdvertisementDAO" %>
     <%@page import="java.util.ArrayList"%>
     <%@page import="model.Advertisement"%>
+    <%@page import="model.User" %>
+    <%@page import="model.dao.UserDAO" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="advertisement.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>advertisements</title>
 </head>
@@ -21,11 +24,14 @@
  	<div class="profile-info">
     <div class="BlockTitle">
       <div class="id">
-        <span style="margin:0px; margin-right:5px;">Profile <b><span id="idka"></span> </b></span>
+      <a href="profile.jsp">Go to profile</a>
       </div>
     </div>  
     <% 
-    	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisements();
+    	String username = (String)session.getAttribute("username"); 	
+		User user=UserDAO.getInstance().getUser(username);
+		int userId=user.getId();
+    	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisements(userId);
  	%>
          <h3>ALL ADVERTISEMENTS</h3>
          <%          
