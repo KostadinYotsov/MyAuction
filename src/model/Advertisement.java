@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Advertisement {
-	private long id;
+	private int id;
 	private String title;
 	private String description;
-	private long userId;
+	private int userId;
 	private int categoryID;
 	private LocalDateTime date;
 	private double price;
@@ -44,15 +44,19 @@ public class Advertisement {
 		return date;
 	}
 	
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getId() {
+		return id;
+	}
 	
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 	
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	
@@ -64,6 +68,5 @@ public class Advertisement {
 	public String toString() {
 		return "Title: " + title + ", Description: " + description + ", Price: " + price + ", Category: "+ category;
 	}
-	
-	
+
 }

@@ -32,7 +32,8 @@
     <% 
 	 	String username = (String)session.getAttribute("username"); 	
     	User user=UserDAO.getInstance().getUser(username);
-    	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisementsByUser((int)user.getId());
+    	int userId=user.getId();
+    	ArrayList<Advertisement> ads= AdvertisementDAO.getInstance().getAllAdvertisementsByUser(userId);
     	
  	%>
     <div class="BlockCont">

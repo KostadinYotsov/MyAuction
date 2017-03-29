@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Advertisement;
+import model.Auction;
 import model.dao.AdvertisementDAO;
+import model.dao.AuctionDAO;
 import model.dao.CategoryDAO;
 import model.dao.UserDAO;
 
 @WebServlet("/makeAdvertisement")
-public class MakeAdvertisementServlet extends HttpServlet {
+public class MakeAuction extends HttpServlet{
+
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,37 +30,25 @@ public class MakeAdvertisementServlet extends HttpServlet {
 		}
 		String username = (String) session.getAttribute("username");
 		String title = req.getParameter("title");
-		String description = req.getParameter("description");
-		String  priceText = req.getParameter("price");
-		String category = req.getParameter("category");
-		int userId=UserDAO.getInstance().getUserId(username);
-		int categoryId=CategoryDAO.getInstance().getCategoryId(category);
-		double price=Double.parseDouble(priceText);
-		System.out.println(title+" "+description+" "+price+" "+category+categoryId+userId);
-		
+		Advertisement adv=AdvertisementDAO.getInstance().getAdvertisement(username, title);
 		boolean validData = false;
 		
-	    if (title != null && !title.trim().isEmpty() && priceText != null && !priceText.trim().isEmpty() &&
-	    	category != null && !category.trim().isEmpty()) {
+	    if (title != null && !title.trim().isEmpty() && adv!=null) {
 				validData=true;
 		}
 		
-	    String filename="makeAdvertismentFailed.html";
+	    String filename="makeAuctionFailed.html";
 		
 		if (validData) {
 			filename="profile.jsp";
-			Advertisement a=new Advertisement(title, description, category, price);
-			a.setCategoryID(categoryId);
-			a.setUserId(userId);
+			Auction a=new Auction(adv);
 			try {
-				AdvertisementDAO.getInstance().addAdvertisement(a);
-				//resp.sendRedirect(filename);NE
+				AuctionDAO.getInstance().addAuction(a);
 			} catch (SQLException e) {
-				filename="makeAdvertismentFailed.html";
-				System.out.println("aaaaa "+e.getMessage());
+				filename="makeAuctionFailed.html";
+				System.out.println("SQL "+e.getMessage());
 			}
 		}
 		resp.sendRedirect(filename);
 	}
-
 }

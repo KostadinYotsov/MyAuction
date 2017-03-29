@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 
 import model.Advertisement;
+import model.User;
 
 
 public class AdvertisementDAO {
 	
 
 	private static AdvertisementDAO instance;
-	private static final ArrayList<Advertisement> allAvertisement = new ArrayList<>();
+	private static final ArrayList<Advertisement> allAdvertisement = new ArrayList<>();
 	
 	private AdvertisementDAO(){
 	}
@@ -40,9 +41,9 @@ public class AdvertisementDAO {
 		
 		ResultSet res = st.getGeneratedKeys();
 		res.next();
-		long id = res.getLong(1);
+		int id = res.getInt(1);
 		a.setId(id);
-		allAvertisement.add(a);
+		allAdvertisement.add(a);
 	}
 
 	public synchronized ArrayList<Advertisement>  getAllAdvertisementsByUser (int userId) {
@@ -59,10 +60,36 @@ public class AdvertisementDAO {
 		} catch (SQLException e) {
 			System.out.println("SQL : " + e.getMessage());
 		}
-		for(Advertisement a : ads){
-			System.out.println(a);
+		return ads;
+	}
+	
+	public synchronized  ArrayList<Advertisement>  getAllAdvertisements (int userId) {
+		ArrayList<Advertisement> ads=new ArrayList<>();
+		String sql="SELECT a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!="+userId;
+		PreparedStatement st;
+		try {
+			st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("type"), res.getDouble("price"));
+				ads.add(a);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
 		}
 		return ads;
+	}
+	
+	public synchronized Advertisement getAdvertisement (String username,String title) {
+		User u= UserDAO.getInstance().getUser(username);
+		int userId=u.getId();
+		ArrayList<Advertisement> ads=AdvertisementDAO.getInstance().getAllAdvertisementsByUser(userId);
+		for (Advertisement a : ads) {
+			if (title.equals(a.getTitle())) {
+				return a;
+			}
+		}	
+		return null;
 	}
 }
 

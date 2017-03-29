@@ -44,7 +44,7 @@ public class UserDAO {
 		st.executeUpdate();
 		ResultSet res = st.getGeneratedKeys();
 		res.next();
-		long id = res.getLong(1);
+		int id = res.getInt(1);
 		u.setId(id);
 		allUsers.put(u.getUsername(), u);
 	}
@@ -57,7 +57,7 @@ public class UserDAO {
 			while(res.next()){
 				User u =new User(
 				res.getString("username"), res.getString("password"), res.getString("firstname"), res.getString("lastname"), res.getString("email"));
-				long id=res.getLong("id");
+				int id=res.getInt("id");
 				u.setId(id);
 				allUsers.put(u.getUsername(), u);
 				
@@ -79,10 +79,10 @@ public class UserDAO {
 		return false;
 	}
 	
-	public long getUserId (String username) {
+	public int getUserId (String username) {
 		if (allUsers.containsKey(username)) {
 			User u=allUsers.get(username);
-			long id=u.getId();
+			int id=u.getId();
 			return id;
 		}
 		return 0;

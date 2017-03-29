@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class User {
 
-	private long id;
+	private int id;
 	private String username;
 	private String password;
 	private String email;
@@ -27,32 +27,6 @@ public class User {
 	}
 	
 	
-	public void deleteAdvertisement(Advertisement ad){
-		if (ad!=null) {
-			this.ads.remove(ad);
-		}
-	}
-	
-
-	public void createAuction(Advertisement ad){
-		if (this.ads.contains(ad) && ad!=null) {
-			Auction auc=new Auction(ad);
-			this.aucs.add(auc);
-			}
-	}
-	
-	
-	public void addOutbidAucs (Auction auc) {
-		this.outbitAucs.add(auc);
-	}
-	
-	public void makeOutbid(Auction auc, double money){
-			this.addOutbidAucs(auc);
-			Outbid outbid=new Outbid(this, money);
-			auc.addOutbid(outbid);
-	}
-	
-
 	public String getUsername() {
 		return username;
 	}
@@ -78,11 +52,11 @@ public class User {
 	}
 
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
