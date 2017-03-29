@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="register.css">
+<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+</head>
+<body ng-controller="RegisterCtrl" ng-app="myApp">
+  <div class = "container">
+    <div id="signup">
+      <div class="signup-screen">
+        <div class="space-bot text-center">
+          <h1>Create advertisement</h1>
+          
+            <h3>Create advertisement failed!</h3>  
+            <h3>Please, check the titles of your advertisements!</h3>  
+        	<a href="profile.jsp">Profile</a>
+          
+          <div class="divider"></div>
+        </div>
+        
+        <form action="makeAuction" method="post" name="makeAuction" novalidate>
+        
+        <div class="input-field col s6">
+            <input id="title" type="text" name="title" class="validate" required>
+            <label for="title">Title of your advertisement</label>
+          </div>     
+          
+          <h3>Auction's start price will be 50% of advertisement's price.</h3>
+            <h3>Auction's sell price will be 90% of advertisement's price.</h3>
+          
+          <div class="control-group">
+     		 <!-- Button -->
+     		 <div class="controls">
+      		  <button class="btn btn-success">Create!</button>
+    		 </div>
+  		  </div>  		   
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

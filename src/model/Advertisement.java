@@ -64,9 +64,10 @@ public class Advertisement {
 		this.categoryID = categoryID;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Title: " + title + ", Description: " + description + ", Price: " + price + ", Category: "+ category;
+		return "Title: " + title +'\n'+ "Description: " + description +'\n'+ "Price: " + price +'\n'+ "Category: "+ category;
 	}
 
 }
