@@ -44,6 +44,10 @@ public class Advertisement {
 		return date;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}

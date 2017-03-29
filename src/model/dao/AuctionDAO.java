@@ -10,8 +10,6 @@ import model.Auction;
 
 public class AuctionDAO {
 
-	
-
 	private static AuctionDAO instance;
 	private static final ArrayList<Auction> allAuctions = new ArrayList<>();
 	

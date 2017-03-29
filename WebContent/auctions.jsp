@@ -39,7 +39,10 @@
          //override toString before test!!!!
          	for(Auction a : auctions){
          	out.println(a); %>
-         	<img src="noimage.gif" width="100" height="100">         	
+         	<img src="noimage.gif" width="100" height="100">   
+         	<form action="outbid" method="post">
+    	 	<button type="submit" class="btn btn-primary btn-block btn-large" >Outbid</button>    	 	
+    		</form>       	
          	<br>
          	<%} 
          %>        
