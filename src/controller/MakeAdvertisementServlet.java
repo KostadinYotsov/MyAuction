@@ -51,10 +51,9 @@ public class MakeAdvertisementServlet extends HttpServlet {
 			a.setUserId(userId);
 			try {
 				AdvertisementDAO.getInstance().addAdvertisement(a);
-				//resp.sendRedirect(filename);NE
 			} catch (SQLException e) {
 				filename="makeAdvertismentFailed.html";
-				System.out.println("aaaaa "+e.getMessage());
+				System.out.println("sql exception "+e.getMessage());
 			}
 		}
 		resp.sendRedirect(filename);

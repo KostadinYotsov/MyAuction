@@ -13,7 +13,7 @@
 <head>
 <link rel="stylesheet" href="profile.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyAuction</title>
+<title>myauction</title>
 </head>
 <body>
 	<% if(session == null || session.isNew() || session.getAttribute("logged") == null || (Boolean) session.getAttribute("logged") == false){		
@@ -43,9 +43,9 @@
          <div class="udtlb">All advertisements: </div><%          
          	for(Advertisement a : ads){
          	out.println(a); %>
+         	<img src="noimage.gif" width="100" height="100">         	
          	<br>
-         	<%} %>
-         
+         	<%} %>         
 	</div>
 
   <div class="profile-info-avatar">
