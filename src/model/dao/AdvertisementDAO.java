@@ -97,5 +97,16 @@ public class AdvertisementDAO {
 		}	
 		return null;
 	}
+	
+	public synchronized Advertisement getAdvertisementByTitle (String title) {
+		ArrayList<Advertisement> ads=AdvertisementDAO.getInstance().getAllAdvertisements(0);
+		for (Advertisement a : ads) {
+			if (title.equals(a.getTitle())) {
+				System.out.println(a.getId());
+				return a;
+			}
+		}	
+		return null;
+	}
 }
 

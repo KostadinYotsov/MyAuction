@@ -71,6 +71,7 @@
         <div style="border-top:1px solid #ccc; border-bottom:1px solid #fff;"></div>
         <a href="makeAuction.html" class="Smenu_link" title="">Create Auction</a>
 		</div>
+		<a href="cart.jsp" class="button">Show Cart</a>
   </div>
 </div>
 

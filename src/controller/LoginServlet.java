@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Advertisement;
 import model.dao.UserDAO;
 
 @WebServlet("/login")
@@ -31,6 +33,7 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session=req.getSession();
 					session.setAttribute("username", username);
 					session.setAttribute("logged", true);
+					session.setAttribute("advertisements", new ArrayList<Advertisement>());
 					fileName = "main.html";
 				}
 				else{

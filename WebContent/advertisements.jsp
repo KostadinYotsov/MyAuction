@@ -71,7 +71,7 @@ tr:nth-child(even) {
 		    <td> <img src="noimage.gif" width="100" height="100"> </td>
 		     <td>
                 <form action="addToCart" method="get">
-                <input type="hidden" name="title" value="<%a.getTitle();%>">
+                <input type="hidden" name="title" value="<%=a.getTitle() %>">>
     	 		<input type="submit" value="Add to cart">
     		 </form>  
            </td>

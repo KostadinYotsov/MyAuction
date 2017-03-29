@@ -23,7 +23,7 @@ public class MakeAdvertisementServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Boolean logged = (Boolean) req.getSession().getAttribute("logged");
 		if (logged==null || logged==false) {
-			resp.sendRedirect("index.html");
+			resp.sendRedirect("login.html");
 		}
 		String username = (String) session.getAttribute("username");
 		String title = req.getParameter("title");
