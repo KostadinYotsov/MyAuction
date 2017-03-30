@@ -14,7 +14,6 @@ public class AdvertisementDAO {
 	
 
 	private static AdvertisementDAO instance;
-	private static final ArrayList<Advertisement> allAdvertisement = new ArrayList<>();
 	
 	private AdvertisementDAO(){
 	}
@@ -43,16 +42,15 @@ public class AdvertisementDAO {
 		res.next();
 		int id = res.getInt(1);
 		a.setId(id);
-		System.out.println(id);
-		allAdvertisement.add(a);
 	}
 
 	public synchronized ArrayList<Advertisement>  getAllAdvertisementsByUser (int userId) {
 		ArrayList<Advertisement> ads=new ArrayList<>();
-		String sql="SELECT a.id, a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id="+userId;
+		String sql="SELECT a.id, a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id=?";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, userId);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				int advId=res.getInt("id");
@@ -68,10 +66,11 @@ public class AdvertisementDAO {
 	
 	public synchronized  ArrayList<Advertisement>  getAllAdvertisements (int userId) {
 		ArrayList<Advertisement> ads=new ArrayList<>();
-		String sql="SELECT a.id,a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!="+userId;
+		String sql="SELECT a.id,a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!=? AND a.id not in (select advertisement_id from auctions)";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, userId);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				int advId=res.getInt("id");
@@ -108,5 +107,17 @@ public class AdvertisementDAO {
 		}	
 		return null;
 	}
+	
+	public synchronized void deleteAdvertisement (int id) {
+		System.out.println(id);
+		String sql="DELETE FROM advertisements WHERE id=?";
+		try {
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
+	}	
 }
 

@@ -1,10 +1,10 @@
 package model;
 
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Advertisement {
+public class Advertisement implements Serializable {
 	private int id;	
 	private String title;
 	private String description;
@@ -19,7 +19,7 @@ public class Advertisement {
 		this.description = description;
 		this.category=category;
 		this.price = price;
-		this.date=date.now();
+		this.date=LocalDateTime.now();
 		
 	}
 	

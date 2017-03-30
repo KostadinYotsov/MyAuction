@@ -40,10 +40,11 @@ public class AuctionDAO {
 	
 	public synchronized ArrayList<Auction>  getAllAuctionsByUser (int userId) {
 		ArrayList<Auction> aucs=new ArrayList<>();
-		String sql="SELECT a.id, a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id="+userId;
+		String sql="SELECT a.id, a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id=?";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, userId);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				int advId=res.getInt("id");
@@ -60,10 +61,11 @@ public class AuctionDAO {
 	
 	public synchronized ArrayList<Auction>  getAllAuctions (int userId) {
 		ArrayList<Auction> aucs=new ArrayList<>();
-		String sql="SELECT a.id, a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id!="+userId;
+		String sql="SELECT a.id, a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id!=?";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, userId);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				int advId=res.getInt("id");

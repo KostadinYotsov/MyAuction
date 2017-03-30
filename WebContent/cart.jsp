@@ -14,7 +14,7 @@
 <% 
 		HashSet<Advertisement> advs=(HashSet)session.getAttribute("advertisements");
 		if(advs==null || advs.isEmpty()){%>
-			<h2>Your cart is empty!</h2>
+			<h2>Your cart is empty!<br><a href="advertisements.jsp"><button>Go to Advertisements</button></a></h2>
 	<%	}
 		else{
  	%>
@@ -39,7 +39,7 @@
 		    <td> <img src="noimage.gif" width="100" height="100"> </td>
 		    <td>
                 <form action="buy" method="post">
-                <input type="hidden" name="id" value="<%=a.getId() %>">>
+                <input type="hidden" name="id" value="<%=a.getId() %>">
     	 		<input type="submit" value="Buy">
     		 </form>  
            </td>
