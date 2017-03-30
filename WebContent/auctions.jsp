@@ -36,19 +36,43 @@
 		User user=UserDAO.getInstance().getUser(username);
 		int userId=user.getId();
     	ArrayList<Auction> auctions=AuctionDAO.getInstance().getAllAuctions(userId) ;
+ 	
+        if(auctions==null || auctions.isEmpty()){%>
+			<h4>No auctions!</h4>
+	<%	}
+		else{
  	%>
-         <h3>ALL AUCTIONS</h3>
-         <%      
-         //override toString before test!!!!
-         	for(Auction a : auctions){
-         	out.println(a); %>
-         	<img src="noimage.gif" width="100" height="100">   
-         	<form action="outbid" method="post">
-    	 	<button type="submit" class="btn btn-primary btn-block btn-large" >Outbid</button>    	 	
-    		</form>       	
-         	<br>
-         	<%} 
-         %>        
+         	   <h4>My Auctions</h4>
+		         <table> 
+		          <tr>
+				    <th>Title</th>
+				    <th>Starting price</th>
+				    <th>Current price</th>
+				    <th>Sell price</th>
+				    <th>Image</th>
+				  </tr>
+		
+	         <%          
+	         	for(Auction a : auctions){
+	         %>
+	         <tr>
+	         	<td><% out.print(a.getAdvertisementTitle());%></td>
+		    	<td><%  out.print(a.getStartingPrice());%></td>
+		   	 	<td><%  out.print(a.getCurrentPrice());%></td>
+		    	<td><%  out.print(a.getSellPrice());%></td>
+			    <td> <img src="noimage.gif" width="100" height="100"> </td>
+			    <td>
+		    		<form action="outbid" method="post">
+    	 				<button type="submit" class="btn btn-primary btn-block btn-large" >Outbid</button>    	 	
+					</form> 
+				</td>
+			 </tr>         	
+         	<%}
+			}
+         %>      
+          </table>
+         <br>
+         <br>  
 </div>
 </body>
 </html>

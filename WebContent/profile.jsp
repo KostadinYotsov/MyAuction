@@ -23,16 +23,7 @@
  			session.invalidate();
 	 		response.sendRedirect("index.html");
 	 		return;
- 		}
- 	%> 	
- 	
-  <div class="profile-info">
-    <div class="BlockTitle">
-      <div class="id">
-        <span style="margin:0px; margin-right:5px;">Profile <b><span id="idka"></span> </b></span>
-      </div>
-    </div>  
-    <% 
+ 		} 
 	 	String username = (String)session.getAttribute("username"); 	
     	User user=UserDAO.getInstance().getUser(username);
     	int userId=user.getId();
@@ -40,28 +31,98 @@
     	ArrayList<Auction> auctions=AuctionDAO.getInstance().getAllAuctionsByUser(userId) ;
     	
  	%>
-    <div class="BlockCont">
-      <div class="udtlb">Username: <%out.print(user.getUsername());%></div>
-       <div class="udtlb">First name: <%out.print(user.getFirstname()); %></div>
-        <div class="udtlb">Last name: <%out.print(user.getLastname()); %></div>
-         <div class="udtlb">Email: <%out.print(user.getEmail());%></div>
-         <div class="udtlb">All advertisements: </div><%          
+         <h3>Profile :</h3>
+         <table> 
+          <tr>
+		    <th>Username</th>
+		    <th>First name</th>
+		    <th>Last name</th>
+		    <th>Email</th>
+		  </tr>
+		  <tr>
+		    <th><%out.print(user.getUsername());%></th>
+		    <th><%out.print(user.getFirstname()); %></th>
+		    <th><%out.print(user.getLastname()); %></th>
+		    <th> <%out.print(user.getEmail());%></th>
+		  </tr>
+		 </table>
+		 <br>
+         <br>
+         <% if(ads==null || ads.isEmpty()){%>
+			<h4>You haven't advertisements!</h4>
+		<%	}
+			else{
+ 		%>
+        <h4>My Advertisements</h4>
+         <table> 
+          <tr>
+		    <th>Title</th>
+		    <th>Description</th>
+		    <th>Category</th>
+		    <th>Price</th>
+		     <th>Image</th>
+		  </tr>
+		
+         <%          
          	for(Advertisement a : ads){
-         	out.println(a); %>
-         	<img src="noimage.gif" width="100" height="100">         	
-         	<br>
-         	<%} %>       
-         	
-         	 <div class="udtlb">All auctions: </div>
-         	<%      
-         	for(Auction a : auctions){
-         	out.println(a); %>
-         	<img src="noimage.gif" width="100" height="100">         	
-         	<br>
-         	<%} 
-         %>          	
-         	  
-	</div>
+         %>
+         <tr>
+         	<td><% out.print(a.getTitle());%></td>
+		    <td><%  out.print(a.getDescription());%></td>
+		    <td><%  out.print(a.getCategory());%></td>
+		    <td><%  out.print(a.getPrice());%></td>
+		    <td> <img src="noimage.gif" width="100" height="100"> </td>
+		     <td>
+                <form action="deleteAdvertisement" method="post">
+                <input type="hidden" name="id" value="<%=a.getId() %>">
+    	 		<input type="submit" value="Delete Advertisement">
+    		 </form>  
+           </td>
+		 </tr>         	
+         	<%}
+			}
+         %>      
+          </table>
+          <br>
+         <br>
+          <% if(auctions==null || auctions.isEmpty()){%>
+			<h4>You haven't auctions!</h4>
+		<%	}
+			else{
+ 		%>
+         	   <h4>My Auctions</h4>
+		         <table> 
+		          <tr>
+				    <th>Title</th>
+				    <th>Starting price</th>
+				    <th>Current price</th>
+				    <th>Sell price</th>
+				    <th>Image</th>
+				  </tr>
+		
+	         <%          
+	         	for(Auction a : auctions){
+	         %>
+	         <tr>
+	         	<td><% out.print(a.getAdvertisementTitle());%></td>
+		    	<td><%  out.print(a.getStartingPrice());%></td>
+		   	 	<td><%  out.print(a.getCurrentPrice());%></td>
+		    	<td><%  out.print(a.getSellPrice());%></td>
+			    <td> <img src="noimage.gif" width="100" height="100"> </td>
+			     <td>
+	                <form action="deleteAuction" method="post">
+	                <input type="hidden" name="id" value="<%=a.getId() %>">
+	    	 		<input type="submit" value="Delete Auction">
+	    		 </form>  
+	           </td>
+			 </tr>         	
+         	<%}
+			}
+         %>      
+          </table>
+         <br>
+         <br>  
+	
 
   <div class="profile-info-avatar">
      	<div style="padding:5px"></div>
@@ -74,7 +135,7 @@
 		  <a href="cart.jsp"><button>Show Cart</button></a><br>
 		   <a href="main.html"><button>Home</button></a>
   </div>
-</div>
+
 
 </body>
 </html>

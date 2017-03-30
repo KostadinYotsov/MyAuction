@@ -49,6 +49,13 @@ public class Auction {
 		this.id=id;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public String getAdvertisementTitle() {
+		return advertisementTitle;
+	}
 	
 	@Override
 	public String toString() {

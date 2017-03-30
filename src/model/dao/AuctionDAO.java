@@ -40,17 +40,19 @@ public class AuctionDAO {
 	
 	public synchronized ArrayList<Auction>  getAllAuctionsByUser (int userId) {
 		ArrayList<Auction> aucs=new ArrayList<>();
-		String sql="SELECT a.id, a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id=?";
+		String sql="SELECT a.id, a.title, a.price, au.id, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE user_id=?";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
 			st.setInt(1, userId);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
-				int advId=res.getInt("id");
+				int advId=res.getInt("a.id");
+				int auctId=res.getInt("au.id");
 				Advertisement adv=new Advertisement(res.getString("title"), null, null, res.getDouble("price"));
 				adv.setId(advId);
 				Auction a=new Auction(adv);
+				a.setId(auctId);
 				aucs.add(a);
 			}
 		} catch (SQLException e) {
@@ -78,5 +80,42 @@ public class AuctionDAO {
 			System.out.println("SQL : " + e.getMessage());
 		}
 		return aucs;
+	}
+	
+	public synchronized void deleteAuction (int id) {
+		String sql="DELETE FROM auctions WHERE id=?";
+		try {
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
+	}
+	
+	public synchronized boolean hasAuction (int id) {
+		String sql="SELECT a.title, a.price, au.startPrice, au.currentPrice, au.sellPrice FROM advertisements a JOIN auctions au ON (au.advertisement_id=a.id) WHERE advertisement_id=?";
+		try {
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, id);
+			ResultSet res = st.executeQuery();
+			if (res.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
+		return false;
+	}
+	
+	public synchronized void deleteAuctionByAdvertismentId (int id) {
+		String sql="DELETE FROM auctions WHERE advertisement_id=?";
+		try {
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL : " + e.getMessage());
+		}
 	}
 }

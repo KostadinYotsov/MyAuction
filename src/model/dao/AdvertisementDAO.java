@@ -66,7 +66,7 @@ public class AdvertisementDAO {
 	
 	public synchronized  ArrayList<Advertisement>  getAllAdvertisements (int userId) {
 		ArrayList<Advertisement> ads=new ArrayList<>();
-		String sql="SELECT a.id,a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!=? AND a.id not in (select advertisement_id from auctions)";
+		String sql="SELECT a.id, a.title, a.description, a.price, c.type FROM advertisements a JOIN categories c ON (a.categorie_id=c.id) WHERE user_id!= ? AND a.id not in (select advertisement_id from auctions)";
 		PreparedStatement st;
 		try {
 			st = DBManager.getInstance().getConnection().prepareStatement(sql);
@@ -77,6 +77,7 @@ public class AdvertisementDAO {
 				Advertisement a=new Advertisement(res.getString("title"), res.getString("description"), res.getString("type"), res.getDouble("price"));
 				a.setId(advId);
 				ads.add(a);
+				System.out.println(a);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL : " + e.getMessage());
@@ -109,7 +110,6 @@ public class AdvertisementDAO {
 	}
 	
 	public synchronized void deleteAdvertisement (int id) {
-		System.out.println(id);
 		String sql="DELETE FROM advertisements WHERE id=?";
 		try {
 			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);

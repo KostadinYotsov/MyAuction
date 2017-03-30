@@ -12,10 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import model.Advertisement;
 import model.dao.AdvertisementDAO;
+import model.dao.AuctionDAO;
 
 
-@WebServlet("/buy")
-public class BuyAdvertisementServlet extends HttpServlet {
+@WebServlet("/deleteAdvertisement")
+public class DeleteAdvertisementServlet extends HttpServlet {
+	
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
@@ -28,17 +30,13 @@ public class BuyAdvertisementServlet extends HttpServlet {
 		if (id>0) {
 			validData=true;
 		}
-		String filename="buyAdvertismentFailed.html";
+		String filename="deleteAdvertismentFailed.html";
 		if (validData) {
-			filename="cart.jsp";
-			AdvertisementDAO.getInstance().deleteAdvertisement(id);
-			HashSet<Advertisement>advs= (HashSet<Advertisement>) session.getAttribute("advertisements");
-			for (Advertisement a: advs) {
-				int idA=a.getId();
-				if (id==idA) {
-					advs.remove(a);
-				}
+			filename="profile.jsp";
+			if (AuctionDAO.getInstance().hasAuction(id)) {
+				AuctionDAO.getInstance().deleteAuctionByAdvertismentId(id);
 			}
+			AdvertisementDAO.getInstance().deleteAdvertisement(id);
 		}
 		resp.sendRedirect(filename);
 	}
