@@ -37,6 +37,12 @@
 		    <td><%  out.print(a.getCategory());%></td>
 		    <td><%  out.print(a.getPrice());%></td>
 		    <td> <img src="noimage.gif" width="100" height="100"> </td>
+		    <td>
+                <form action="buy" method="post">
+                <input type="hidden" name="id" value="<%=a.getId() %>">>
+    	 		<input type="submit" value="Buy">
+    		 </form>  
+           </td>
 		 </tr>         	
          	<%} %>      
           </table>   

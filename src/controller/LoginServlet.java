@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("logged", true);
 					session.setAttribute("advertisements", new HashSet<Advertisement>());
 					fileName = "main.html";
+					
 				}
 				else{
 					fileName = "loginFailed.html";

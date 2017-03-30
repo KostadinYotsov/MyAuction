@@ -5,8 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Advertisement {
-	private int id;
-	
+	private int id;	
 	private String title;
 	private String description;
 	private int userId;

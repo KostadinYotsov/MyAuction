@@ -92,6 +92,7 @@ public class UserDAO {
 		return false;
 	}
 	
+	
 	public int getUserId (String username) {
 		if (allUsers.containsKey(username)) {
 			User u=allUsers.get(username);
