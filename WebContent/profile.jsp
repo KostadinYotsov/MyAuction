@@ -7,9 +7,10 @@
 <%@page import="model.dao.AdvertisementDAO" %>
 <%@page import="model.dao.AuctionDAO" %>
 <%@page import="model.User" %>
-
+<%@page errorPage="error.jsp" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <% %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -66,12 +67,12 @@
      	<div style="padding:5px"></div>
 		<div class="BlockCont">
 			<div style="border-bottom: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(204, 204, 204);"></div>
-			<a href="makeAdvertisement.html" class="Smenu_link" title="">Create Advertisement</a>
-			
+			 <a href="makeAdvertisement.html"><button>Create Advertisement</button></a>			
         <div style="border-top:1px solid #ccc; border-bottom:1px solid #fff;"></div>
-        <a href="makeAuction.html" class="Smenu_link" title="">Create Auction</a>
+         <a href="makeAuction.html"><button>Create Auction</button></a>
 		</div>
-		<a href="cart.jsp" class="button">Show Cart</a>
+		  <a href="cart.jsp"><button>Show Cart</button></a><br>
+		   <a href="main.html"><button>Home</button></a>
   </div>
 </div>
 

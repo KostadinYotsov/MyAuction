@@ -1,6 +1,11 @@
 package model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import model.dao.DBManager;
 
 public class User {
 
@@ -33,7 +38,7 @@ public class User {
 
 
 	public String getPassword() {
-		return password;
+		return this.password;	
 	}
 
 

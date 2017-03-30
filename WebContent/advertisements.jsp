@@ -5,6 +5,7 @@
     <%@page import="model.Advertisement"%>
     <%@page import="model.User" %>
     <%@page import="model.dao.UserDAO" %>
+    <%@page errorPage="error.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,10 +42,11 @@ tr:nth-child(even) {
  	<div class="profile-info">
     <div class="BlockTitle">
       <div class="id">
-      <a href="profile.jsp">Go to profile</a>
+       <a href="profile.jsp"><button>Go to profile</button></a>
       </div>
     </div>  
     <% 
+     
     	String username = (String)session.getAttribute("username"); 	
 		User user=UserDAO.getInstance().getUser(username);
 		int userId=user.getId();

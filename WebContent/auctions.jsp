@@ -5,6 +5,7 @@
 <%@page import="model.dao.AuctionDAO"%>
 <%@page import="model.User" %>
 <%@page import="model.dao.UserDAO" %>
+<%@page errorPage="error.jsp" %>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,7 +26,9 @@
  	<div class="profile-info">
     <div class="BlockTitle">
       <div class="id">
-       <a href="profile.jsp">Go to profile</a>
+       <a href="profile.jsp">
+   		<button>Go to profile</button>
+	   </a>
       </div>
     </div>  
     <% 
@@ -34,7 +37,7 @@
 		int userId=user.getId();
     	ArrayList<Auction> auctions=AuctionDAO.getInstance().getAllAuctions(userId) ;
  	%>
-         <h3>ALL ADVERTISEMENTS</h3>
+         <h3>ALL AUCTIONS</h3>
          <%      
          //override toString before test!!!!
          	for(Auction a : auctions){

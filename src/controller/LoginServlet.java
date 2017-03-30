@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session=req.getSession();
 					session.setAttribute("username", username);
 					session.setAttribute("logged", true);
-					session.setAttribute("advertisements", new ArrayList<Advertisement>());
+					session.setAttribute("advertisements", new HashSet<Advertisement>());
 					fileName = "main.html";
 				}
 				else{

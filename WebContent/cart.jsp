@@ -1,5 +1,7 @@
+<%@page import="java.util.HashSet"%>
 <%@page import="model.Advertisement"%>
 <%@page import="java.util.ArrayList"%>
+<%@page errorPage="error.jsp" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +12,11 @@
 </head>
 <body>
 <% 
-    	ArrayList<Advertisement> advs=(ArrayList)session.getAttribute("advertisements");
+		HashSet<Advertisement> advs=(HashSet)session.getAttribute("advertisements");
+		if(advs==null || advs.isEmpty()){%>
+			<h2>Your cart is empty!</h2>
+	<%	}
+		else{
  	%>
          <h3>ADVERTISEMENTS</h3>
          <table> 
@@ -32,8 +38,8 @@
 		    <td><%  out.print(a.getPrice());%></td>
 		    <td> <img src="noimage.gif" width="100" height="100"> </td>
 		 </tr>         	
-         	<%} 
-         %>      
-          </table>    
+         	<%} %>      
+          </table>   
+        <%} %> 
 </body>
 </html>

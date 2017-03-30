@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,11 +25,8 @@ public class AddToCartServlet extends HttpServlet {
 		}
 		String title = req.getParameter("title");
 		Advertisement a=AdvertisementDAO.getInstance().getAdvertisementByTitle(title);
-		ArrayList advertisements = (ArrayList) session.getAttribute("advertisements");
+		HashSet advertisements = (HashSet) session.getAttribute("advertisements");
 		advertisements.add(a);
-		System.out.println("ad: "+a +"  " + "get title"+title);
-		resp.sendRedirect("advertisements.jsp");
-		
+		resp.sendRedirect("advertisements.jsp");		
 	}
-
 }
